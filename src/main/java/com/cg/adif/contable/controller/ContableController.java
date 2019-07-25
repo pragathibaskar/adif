@@ -123,10 +123,14 @@ public class ContableController {
 	 
 	 
 	 @PostMapping("/codigo")
-	 Provisionados createNew(@RequestBody Provisionados p)
-	 {
-		 return codigosvc.createNew(p);
-	 }
+		ResponseEntity<Provisionados> createNew(@RequestBody Provisionados c)
+		{
+		 Provisionados con = codigosvc.createNew(c);
+		 if(con!=null)
+			    return new ResponseEntity<>(c, HttpStatus.OK);
+			else
+			    return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+		}
 	 
 	
 	 
